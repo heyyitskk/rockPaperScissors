@@ -3,13 +3,32 @@ function getComputerChoice() {
 }
 
 function getRPS(){
-    ch = getComputerChoice();
+    let ch = getComputerChoice();
     if (ch == 1)
-        console.log("Rock");
+        return "rock";
     else if (ch == 2)
-        console.log("Paper");
+        return "paper";
     else
-        console.log("Scissor");   
+        return "scissors";
 }
 
-getRPS();
+let computerSelection = getRPS();
+
+let playerSelection = prompt("Enter your choice").toLowerCase();
+
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection == "rock" && computerSelection == "scissors")
+        return ("You Won! Rock beats scissors");
+    else if (playerSelection == "paper" && computerSelection == "rock")
+        return ("You Won! Paper beats rock");
+    else if (playerSelection == "scissors" && computerSelection == "paper")
+        return ("You Won! Scissors beats paper");
+    else if (playerSelection == "scissors" && computerSelection == "rock")
+        return ("You Lose! Rock beats scissors");
+    else if (playerSelection == "rock" && computerSelection == "paper")
+        return ("You Lose! Paper beats rock");
+    else if (playerSelection == "paper" && computerSelection == "scissors")
+        return ("You Lose! Scissors beats paper");
+}
+
+console.log(playRound(playerSelection, computerSelection));
