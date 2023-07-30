@@ -38,6 +38,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 const displayResult = document.getElementById("result");
+
 function getResult() {
     if (p === 5) {
         displayFResult("Player won the match!");
@@ -73,7 +74,8 @@ function setupButtonClickEvent() {
             const computerScoreElement = document.getElementById("computerScore");
             playerScoreElement.textContent = p;
             computerScoreElement.textContent = c;
-            getResult();
+            if(p === 5 || c === 4)
+                getResult();
         });
     }
 }
