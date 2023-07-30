@@ -74,7 +74,7 @@ function setupButtonClickEvent() {
             const computerScoreElement = document.getElementById("computerScore");
             playerScoreElement.textContent = p;
             computerScoreElement.textContent = c;
-            if(p === 5 || c === 4)
+            if(p === 5 || c === 5)
                 getResult();
         });
     }
