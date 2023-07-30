@@ -12,52 +12,70 @@ function getRPS(){
         return "scissors";
 }
 
-let p, c;
+let p = 0;
+let c = 0;
 function playRound(playerSelection, computerSelection) {
     if (playerSelection == "rock" && computerSelection == "scissors") {
-        p++;
         return ("You Won! Rock beats scissors");
     }
     else if (playerSelection == "paper" && computerSelection == "rock"){
-        p++;
         return ("You Won! Paper beats rock");
     }
     else if (playerSelection == "scissors" && computerSelection == "paper"){
-        p++;
         return ("You Won! Scissors beats paper");
     }
     else if (playerSelection == "scissors" && computerSelection == "rock"){
-        c++;
         return ("You Lose! Rock beats scissors");
     }
     else if (playerSelection == "rock" && computerSelection == "paper"){
-        c++;
         return ("You Lose! Paper beats rock");
     }
     else if (playerSelection == "paper" && computerSelection == "scissors"){
-        c++;
         return ("You Lose! Scissors beats paper");
     }
     else 
-        return ("It's a tie!");
+    return ("It's a tie!");
 }
 
-function game(){
-    let computerSelection;
-    let playerSelection;
-    p = 0;
-    c = 0;
-    for(n = 0; n < 5; n++){
-        computerSelection = getRPS();
-        playerSelection = prompt("Enter your choice").toLowerCase();
-        console.log(playRound(playerSelection, computerSelection));
+const displayResult = document.getElementById("result");
+function getResult() {
+    if (p === 5) {
+        displayFResult("Player won the match!");
+        p = c = 0;
+    } else if (c === 5) {
+        displayFResult("Computer won the match!");
+        c = p = 0;
     }
-    if(p > c)
-        console.log("Player won the match!");
-    else if(p < c)
-        console.log("Computer won the match!");
-    else
-        console.log("The match is a draw..");
+    function displayFResult(displayFinalResult){
+        const mResult = document.createElement("div");
+        mResult.textContent = displayFinalResult;
+        displayResult.appendChild(mResult);
+    }
 }
 
-game();
+function setupButtonClickEvent() {
+    const pcs = document.getElementsByClassName("pc");
+    for (const pc of pcs) {
+        pc.addEventListener("click", () => {
+            computerSelection = getRPS();
+            
+            const result = playRound(pc.id, computerSelection);
+            displayResult.textContent = result;
+            
+            
+            if (result.includes("You Won!")) {
+                p++;
+            } else if (result.includes("You Lose!")) {
+                c++;
+            }
+            // Create a new div to hold the player and computer scores
+            const playerScoreElement = document.getElementById("playerScore");
+            const computerScoreElement = document.getElementById("computerScore");
+            playerScoreElement.textContent = p;
+            computerScoreElement.textContent = c;
+            getResult();
+        });
+    }
+}
+
+setupButtonClickEvent();
