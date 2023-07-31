@@ -57,7 +57,7 @@ function getResult() {
     }
     const replay = document.createElement("button");
     const scoreboard = document.getElementById("scoreboard");
-    replay.textContent = "replay";
+    replay.innerHTML = `<img style="height: 50px; width: 50px;" src="reload.jpg" alt="reload">`
     scoreboard.appendChild(replay);
     replay.addEventListener("click", () => {
         console.log(5);

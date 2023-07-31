@@ -11,6 +11,7 @@ body{
 img {
     height: 200px;
     width: 120px;
+    border-radius: 10px;
 }
 
 #rock, #paper, #scissors{
@@ -34,6 +35,6 @@ button{
 }
 
 button :hover {
-    filter: drop-shadow(5px 5px 5px white);
+    filter: drop-shadow(1px 3px 10px white);
     transform: scale(0.96);
 }
