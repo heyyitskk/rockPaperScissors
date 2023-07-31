@@ -72,8 +72,8 @@ function setupButtonClickEvent() {
             // Create a new div to hold the player and computer scores
             const playerScoreElement = document.getElementById("playerScore");
             const computerScoreElement = document.getElementById("computerScore");
-            playerScoreElement.textContent = p;
-            computerScoreElement.textContent = c;
+            playerScoreElement.textContent = `Player Score: ${p}`;
+            computerScoreElement.textContent = `Computer Score: ${c}`;
             if(p === 5 || c === 5)
                 getResult();
         });
