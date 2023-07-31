@@ -38,46 +38,61 @@ function playRound(playerSelection, computerSelection) {
 }
 
 const displayResult = document.getElementById("result");
+const playerScoreElement = document.getElementById("playerScore");
+const computerScoreElement = document.getElementById("computerScore");
+const mResult = document.createElement("div");
+
+function displayFResult(displayFinalResult){ 
+    mResult.textContent = displayFinalResult;
+    displayResult.appendChild(mResult);
+    playerScoreElement.textContent = ``;
+    computerScoreElement.textContent = ``;
+}
 
 function getResult() {
     if (p === 5) {
         displayFResult("Player won the match!");
-        p = c = 0;
-    } else if (c === 5) {
+    } else {
         displayFResult("Computer won the match!");
-        c = p = 0;
     }
-    function displayFResult(displayFinalResult){
-        const mResult = document.createElement("div");
-        mResult.textContent = displayFinalResult;
-        displayResult.appendChild(mResult);
-    }
+    const replay = document.createElement("button");
+    const scoreboard = document.getElementById("scoreboard");
+    replay.textContent = "replay";
+    scoreboard.appendChild(replay);
+    replay.addEventListener("click", () => {
+        console.log(5);
+        p = c = 0;
+        displayResult.removeChild(mResult);
+        scoreboard.removeChild(replay);
+        displayResult.textContent = ``;
+    })
 }
 
+const pcs = document.getElementsByClassName("pc");
 function setupButtonClickEvent() {
-    const pcs = document.getElementsByClassName("pc");
     for (const pc of pcs) {
         pc.addEventListener("click", () => {
             computerSelection = getRPS();
-            
-            const result = playRound(pc.id, computerSelection);
-            displayResult.textContent = result;
-            
-            
-            if (result.includes("You Won!")) {
-                p++;
-            } else if (result.includes("You Lose!")) {
-                c++;
+            if(p < 5 && c < 5){
+                const result = playRound(pc.id, computerSelection);
+                displayResult.textContent = result;
+                
+                if (result.includes("You Won!")) {
+                    p++;
+                } else if (result.includes("You Lose!")) {
+                    c++;
+                }
+                
+                // Create a new div to hold the player and computer scores
+                playerScoreElement.textContent = `Player Score: ${p}`;
+                computerScoreElement.textContent = `Computer Score: ${c}`;
+                if(p === 5 || c === 5)
+                    getResult();
             }
-            // Create a new div to hold the player and computer scores
-            const playerScoreElement = document.getElementById("playerScore");
-            const computerScoreElement = document.getElementById("computerScore");
-            playerScoreElement.textContent = `Player Score: ${p}`;
-            computerScoreElement.textContent = `Computer Score: ${c}`;
-            if(p === 5 || c === 5)
-                getResult();
         });
     }
 }
 
+
 setupButtonClickEvent();
+

@@ -3,6 +3,9 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: rgb(30, 26, 108);
+    color: azure;
+    text-align: center;
 }
 
 img {
@@ -27,4 +30,10 @@ div#rpsChoice {
 
 button{
     border: 0px;
+    background-color:  rgb(30, 26, 108);
+}
+
+button :hover {
+    filter: drop-shadow(5px 5px 5px white);
+    transform: scale(0.96);
 }
